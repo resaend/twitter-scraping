@@ -1,12 +1,11 @@
 import csv
 from datetime import datetime
 from playwright.sync_api import sync_playwright
-from alive_progress import alive_bar  # Import alive_bar untuk animasi progress
-from colorama import init, Fore  # Import colorama untuk menambahkan warna
-import time  # Import time untuk menambahkan delay
+from alive_progress import alive_bar  
+from colorama import init, Fore  
+import time  
 import sys
 
-# Inisialisasi colorama
 init(autoreset=True)
 
 def format_timestamp(timestamp_text):
@@ -21,7 +20,6 @@ def format_timestamp(timestamp_text):
         return "[!] Forwmat waktu salah"
 
 def scrape_tweets_with_auth(tweet_url, auth_token, max_replies=10, output_file="replies.csv"):
-    # Mulai Playwright
     with sync_playwright() as p:
         # Inisialisasi browser dan halaman
         browser = p.chromium.launch(headless=True)  # Set headless=True untuk menjalankan di background
@@ -32,7 +30,7 @@ def scrape_tweets_with_auth(tweet_url, auth_token, max_replies=10, output_file="
         page.context.add_cookies([{
             'name': 'auth_token',
             'value': auth_token,
-            'domain': '.x.com',  # Domain harus sesuai dengan X
+            'domain': '.x.com',  
             'path': '/',
             'httpOnly': True,
             'secure': True
